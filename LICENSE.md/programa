@@ -1,0 +1,46 @@
+#com o cep digitado, ele completa as informações do usuário..
+
+
+import requests
+
+def endereço():
+
+    print('############')
+    print('primeira api ')
+    print('##############')
+
+    cep = input('digite o cep ')
+
+    if len(cep) !=8:
+
+        print('cep  errado, verifique o cep')
+        exit()
+
+    request = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep))
+
+    address_data = request.json()
+
+    if 'erro' not in address_data:
+    
+         print('cep:{}'.format(address_data['cep']))
+         print('logradouro: {}'.format(address_data['logradouro']))
+         print('complemento: {}'.format(address_data['complemento']))
+         print('bairro: {}'.format(address_data['bairro']))
+         print('cidade: {}'.format(address_data['localidade']))
+         print('estado: {}'.format(address_data['uf']))
+         
+
+    else:
+        print('cep invalido')
+
+endereço()
+
+continua = int(input('digite 1 para continuar e 0 para sair'))
+
+while continua == 1:
+    endereço()
+
+    if continua ==0:
+        print('flw')
+        break
+        
